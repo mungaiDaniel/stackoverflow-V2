@@ -1,68 +1,26 @@
-from datetime import datetime
+import datetime
 from flask import jsonify
 from flask_jwt_extended import get_jwt_identity, create_access_token
 from passlib.handlers.pbkdf2 import pbkdf2_sha256
+from app.database import MY_DATABASE
 
-import os
-import psycopg2
+cursor = MY_DATABASE.connect_to_db()
 
-class Users:
-    
-    @classmethod
-    def connect_to_db(cls):
-        
-        connect = psycopg2.connect(os.environ['DATABASE_URL'])
-        connect.autocommit = True
-        cursor = connect.cursor()
-        
-        return cursor
-    
-    
-    @classmethod
-    def create_users_table(cls):
-
-        cursor = Users.connect_to_db()
-        sql_command = """CREATE TABLE IF NOT EXISTS "public"."users"  (
-        id SERIAL ,
-        username VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        date_created VARCHAR(80),
-        date_modified VARCHAR(80),
-        PRIMARY KEY (id)
-            )"""
-        cursor.execute(sql_command)
-        
-
-cursor = Users.connect_to_db()
-Users.create_users_table()
+MY_DATABASE.create_users_table()
 
 
-class User:
+class User(MY_DATABASE):
     '''Class to model a user'''
 
-    def __init__(self, id, username, email, password, date_created, date_modified):
+    def __init__(self,id, username, email, password, date_created, date_modified):
         '''method to initialize User class'''
-        self.id = id
+        self.id = id    
         self.username = username
         self.email = email
         self.password = password
         self.date_created = date_created
         self.date_modified = date_modified
 
-    def save(self, username, email, password, date_created, date_modified):
-        '''method to save a user'''
-        format_str = f"""
-                 INSERT INTO public.users (username,email,password,date_created,date_modified)
-                 VALUES ('{username}','{email}','{password}','{str(datetime.now())}','{str(datetime.now())}');
-                 """
-        cursor.execute(format_str)
-        return {
-            "username": username,
-            "email": email,
-            "date_created": str(date_created),
-            "date_modified": str(date_modified)
-        }
 
     @classmethod
     def find_by_email(cls, email):
@@ -126,3 +84,21 @@ class User:
             "datemodified": self.date_modified
         }
         return ans
+    
+    @classmethod
+    def get_all(cls):
+        
+        ''' method to get all users'''
+        cursor.execute(
+            f"SELECT * FROM public.users"
+        )
+        rows = cursor.fetchall()
+        
+        output = []
+        
+        for row in rows:
+            new = User(id=row[0], username=row[1], email=row[2], password=row[3], date_created=row[4], date_modified=row[5])
+            
+            output.append(new.json_dumps())
+            
+        return output
