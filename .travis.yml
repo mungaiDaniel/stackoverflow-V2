@@ -1,0 +1,28 @@
+language: python
+
+python:
+  - "3.8"
+
+env:
+before_script:
+
+  - psql -c 'create database stackoverflow_lite_test;' -U postgres
+  - psql -c "create user testuser with PASSWORD 'username';" -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+
+install:
+- pip install -r requirements.txt
+- pip install coveralls
+- pip install codeclimate-test-reporter
+
+# command to run tests
+script:
+
+  - pytest --cov-report term-missing --cov=app
+
+#code to run after tests
+after_success:
+  - coveralls
+  - codeclimate-test-reporter
