@@ -1,0 +1,35 @@
+language: python
+
+python:
+  - "3.8"
+
+services:
+  - postgresql
+
+env:
+  global:
+  - SECRET_KEY=you-will-never-guess
+  - DATABASE_URL=postgresql://postgres:username@localhost/user
+  - JWT_SECRET_KEY=this-is-secret
+before_script:
+
+  - psql -c 'create database user;' -U postgres
+  - psql -c "create user postgres with PASSWORD 'username';" -U postgres
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+
+install:
+- pip install -r requirements.txt
+- pip install coveralls
+- pip install codeclimate-test-reporter
+
+# command to run tests
+script:
+
+  - pytest --cov-report term-missing --cov=app
+
+#code to run after tests
+after_success:
+  - coveralls
+  - codeclimate-test-reporter
