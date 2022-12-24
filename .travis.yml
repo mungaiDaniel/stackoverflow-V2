@@ -3,11 +3,18 @@ language: python
 python:
   - "3.8"
 
+services:
+  - postgresql
+
 env:
+  global:
+  - SECRET_KEY=you-will-never-guess
+  - DATABASE_URL=postgresql://postgres:username@localhost/user
+  - JWT_SECRET_KEY=this-is-secret
 before_script:
 
-  - psql -c 'create database stackoverflow_lite_test;' -U postgres
-  - psql -c "create user testuser with PASSWORD 'username';" -U postgres
+  - psql -c 'create database user;' -U postgres
+  - psql -c "create user postgres with PASSWORD 'username';" -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
