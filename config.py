@@ -28,7 +28,7 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    DATABASE_TEST_URL = os.environ.get('DATABASE_URL')
+    DATABASE_URL = os.environ.get('DATABASE_TEST_URL')
     TESTING = True
 
 

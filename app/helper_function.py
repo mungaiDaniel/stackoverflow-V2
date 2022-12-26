@@ -5,8 +5,20 @@ def register_user(self):
     return self.client.post(
         'api/v2/signup',
         data=json.dumps(dict(
-            username='Daniel',
-            email='Danitomonga@yahoo.com',
+            username='username254',
+            email='username254@gmail.com',
+            password='password'
+        )),
+        content_type='application/json'
+    )
+
+def register_user2(self):
+    '''register user'''
+    return self.client.post(
+        'api/v2/signup',
+        data=json.dumps(dict(
+            username='username2542',
+            email='username2542@gmail.com',
             password='password'
         )),
         content_type='application/json'

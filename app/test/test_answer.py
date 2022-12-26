@@ -23,15 +23,6 @@ class TestAnswer(unittest.TestCase):
         MY_DATABASE.create_questions_table()
         MY_DATABASE.create_answers_table()
         
-    def test_init(self):
-        
-        '''test that an answer is initialized'''
-        self.new_answer = Answer(id=1, body="how to init python how to init python how to init python", question_id=1,
-                                 user_id=1,
-                                 date_created=datetime.datetime.now(), date_modified=datetime.datetime.now(), accept=False)
-        self.assertTrue(type(self.new_answer.id), int)
-        self.assertEqual(type(self.new_answer), Answer)
-        
     def setUp(self):
         '''setting up configurations for testing'''
         MY_DATABASE.create_questions_table()
@@ -44,8 +35,18 @@ class TestAnswer(unittest.TestCase):
         self.client = self.app.test_client()
         self.app.testing = True
         
+    def test_init(self):
+        
+        '''test that an answer is initialized'''
+        self.new_answer = Answer(id=1, body="how to init python how to init python how to init python", question_id=1,
+                                 user_id=1,
+                                 date_created=datetime.datetime.now(), date_modified=datetime.datetime.now(), accept=False)
+        self.assertTrue(type(self.new_answer.id), int)
+        self.assertEqual(type(self.new_answer), Answer)
+        
     def test_answer_posted(self):
         '''test that an answer can be posted'''
+        res = register_user(self)
         response = login_user(self)
         result = json.loads(response.data)
         self.assertIn("access_token", result)

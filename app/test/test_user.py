@@ -12,6 +12,7 @@ class TestQuestion(unittest.TestCase):
     '''class to test a question'''
 
     def tearDown(self):
+        MY_DATABASE.drop_users_table()
         MY_DATABASE.drop_questions_table()
         MY_DATABASE.drop_answers_table()
         MY_DATABASE.create_users_table()
@@ -46,6 +47,9 @@ class TestQuestion(unittest.TestCase):
         
     def test_register_username_twice(self):
         # Test can register a username twice
+        new_user1 = {'username': 'username3', 'email': 'danitomonga@gmail.com', 'password': 'password'}
+        response = self.client.post('api/v2/signup',
+                                    data=json.dumps(new_user1), content_type='application/json')
         new_user = {'username': 'username3', 'email': 'danitomonga@gmail.com', 'password': 'password'}
         response = self.client.post('api/v2/signup',
                                     data=json.dumps(new_user), content_type='application/json')
@@ -53,6 +57,9 @@ class TestQuestion(unittest.TestCase):
         
     def test_register_email_twice(self):
         # Test can register a user an email  twice
+        new_user1 = {'username': 'username3', 'email': 'danitomonga@gmail.com', 'password': 'password'}
+        response1 = self.client.post('api/v2/signup',
+                                    data=json.dumps(new_user1), content_type='application/json')
         new_user = {'username': 'username3', 'email': 'danitomonga@gmail.com', 'password': 'password'}
         response = self.client.post('api/v2/signup',
                                     data=json.dumps(new_user), content_type='application/json')
