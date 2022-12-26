@@ -15,15 +15,13 @@ jwt = JWTManager(app)
 app.register_blueprint(user_v2)
 app.register_blueprint(question_v2)
 app.register_blueprint(answer_V2)
+app.debug = True
 
 MY_DATABASE.connect_to_db()
 MY_DATABASE.create_users_table()
 MY_DATABASE.create_questions_table()
 MY_DATABASE.create_answers_table()
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
     
 
 from app.users import routes, model
