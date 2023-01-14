@@ -1,7 +1,9 @@
+# from flask_cors import cross_origin
 from flask import Blueprint, make_response, jsonify, request
 from app.database import MY_DATABASE
 from app.users.model import User
 from datetime import datetime
+# from flask_cors import CORS, cross_origin
 from app.validator import Validate
 from flask_jwt_extended import create_access_token, jwt_required, \
     get_jwt_identity
@@ -9,6 +11,7 @@ from flask_jwt_extended import create_access_token, jwt_required, \
 user_v2 = Blueprint('user-v2', __name__, url_prefix='/api/v2')
 
 @user_v2.route('/signup', methods=['POST'])
+# @cross_origin(origin='localhost', headers=['Content-type', 'Authorization'], supports_credentials=True)
 def post():
     data = request.get_json()
     
@@ -46,8 +49,18 @@ def login():
             return {'message': 'User {} doesnt exist'.format(
                 data['username'])}, 404
             
+    password = data['password']
     
-    if User.find_by_email(data['email']):
+    hash = current_user[3]
+    
+    if not User.verify_hash(password,hash):
+        return {
+            "messgae":"Incorect email or password"
+        }, 401
+    
+            
+    
+    if User.find_by_username(data['username']):
             access_token = create_access_token(current_user[0])
             return dict(message='Logged in as {}'.format(current_user[1]),
                         access_token=access_token), 200

@@ -41,6 +41,20 @@ class Answer(MY_DATABASE):
             "date_created": str(date_created),
             "date_modified": str(date_modified),
         }
+        
+    def json_dumps(self):
+        '''method to return a json object from the answer details'''
+        
+        obj = {
+            "id": self.id,
+            "body": self.body,
+            "user_id": self.user_id,
+            "question_id": self.question_id,
+            "datecreated": self.date_created,
+            "datemodified": self.date_modified
+            
+        }
+        return obj
 
     @classmethod
     def get_all_question_answers(cls, question_id):
@@ -50,7 +64,7 @@ class Answer(MY_DATABASE):
         rows = cursor.fetchall()
         answers_retrieved_dict = []
         for answer in rows:
-            if answer[2] == str(question_id):
+            if answer[2] == (question_id):
                 answer_question = Answer(id=answer[0], body=answer[1], question_id=answer[2], user_id=answer[3],
                                          date_created=answer[4],
                                          date_modified=answer[5], accept=answer[6])
@@ -98,16 +112,4 @@ class Answer(MY_DATABASE):
         format_str = f"""UPDATE public.answers SET accept=true WHERE id = id;"""
         cursor.execute(format_str)
 
-    def json_dumps(self):
-        '''method to return a json object from the answer details'''
-        
-        obj = {
-            "id": self.id,
-            "body": self.body,
-            "user_id": self.user_id,
-            "question_id": self.question_id,
-            "datecreated": self.date_created,
-            "datemodified": self.date_modified
-            
-        }
-        return obj
+    
