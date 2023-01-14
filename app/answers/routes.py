@@ -8,7 +8,7 @@ answer_V2 = Blueprint('answer_v2', __name__, url_prefix='/api/v2')
 
 @answer_V2.route('/answers/<int:id>', methods=['GET'])
 def get(id):
-    all_answers = Answer.get_all_question_answers(id=id)
+    all_answers = Answer.get_all_question_answers(question_id=id)
     
     return make_response(jsonify({
         "status": 200,

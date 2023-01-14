@@ -21,7 +21,7 @@ def post():
     new_question = Question(id=None,title=title, body=body, user_id=user_id, date_created=datetime.datetime.now(), date_modified=datetime.datetime.now())
     format_str = f"""
          INSERT INTO public.questions (title,body,user_id,date_created,date_modified)
-         VALUES ('{title}','{body}',{user_id},'{str(datetime.datetime.now())}','{str(datetime.datetime.now())}') ;
+         VALUES ('{title}','{body}',{user_id},'{str(datetime.datetime.now().date())}','{str(datetime.datetime.now().date())}') ;
          """
     
     new_question.save(format_str)
