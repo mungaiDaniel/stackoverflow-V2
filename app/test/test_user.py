@@ -2,7 +2,7 @@ import json
 import unittest
 import datetime
 
-from app import app
+from app.app import app
 from app.database import MY_DATABASE
 from app.users.model import User
 from config import TestingConfig
