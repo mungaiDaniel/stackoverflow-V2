@@ -4,7 +4,7 @@ import unittest
 
 import datetime
 
-from app import app
+from app.app import app
 
 from app.database import MY_DATABASE
 
