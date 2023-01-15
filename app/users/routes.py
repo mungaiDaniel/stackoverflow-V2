@@ -55,7 +55,7 @@ def login():
     
     if not User.verify_hash(password,hash):
         return {
-            "messgae":"Incorect email or password"
+            "messgae":"Incorect username or password"
         }, 401
     
             

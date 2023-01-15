@@ -28,18 +28,19 @@ jobs:
     # Then run your tests!
     # CircleCI will report the results back to your VCS provider.
         environment:
-          TEST_DATABASE_URL: postgres://postgres:username@localhost/test
+          DATABASE_URL: postgres://postgres:username@localhost/test
         auth:
-          username: Daniel Mungai
-          password: <resource.delimiter>@</resource.delimiter>wanjiruAmungai32
+          username: mungaidaniel
+          password: wanjiruAmungai32
 
       - image: cimg/postgres:14.0
         auth:
-          username: Daniel Mungai
-          password: <resource.delimiter>@</resource.delimiter>wanjiruAmungai32
+          username: mungaidaniel
+          password: wanjiruAmungai32
         environment: 
           POSTGRES_USER: postgres
           POSTGRES_DB: test
+          -e POSTGRES_PASSWORD: username
 
 
 
@@ -63,7 +64,7 @@ jobs:
           name: install dockerize
 
           command: wget
-    https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+               https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
           environment:
             DOCKERIZE_VERSION: v0.6.1
