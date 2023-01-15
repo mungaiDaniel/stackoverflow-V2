@@ -30,13 +30,13 @@ jobs:
         environment:
           TEST_DATABASE_URL: postgres://postgres:username@localhost/test
         auth:
-          username: Daniel Mungai
-          password: <resource.delimiter>@</resource.delimiter>wanjiruAmungai32
+          username: mungaidaniel
+          password: wanjiruAmungai32
 
       - image: cimg/postgres:14.0
         auth:
-          username: Daniel Mungai
-          password: <resource.delimiter>@</resource.delimiter>wanjiruAmungai32
+          username: mungaidaniel
+          password: wanjiruAmungai32
         environment: 
           POSTGRES_USER: postgres
           POSTGRES_DB: test
