@@ -17,7 +17,6 @@ jwt = JWTManager(app)
 app.register_blueprint(user_v2)
 app.register_blueprint(question_v2)
 app.register_blueprint(answer_V2)
-app.debug = True
 
 MY_DATABASE.connect_to_db()
 MY_DATABASE.create_users_table()
@@ -30,3 +29,6 @@ from app.users import routes, model
 from app.questions import routes, model
 from app.answers import routes, model
 from app import database
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5000, debug=True)
