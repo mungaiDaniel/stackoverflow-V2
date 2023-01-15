@@ -13,6 +13,7 @@ class TestQuestion(unittest.TestCase):
     '''class to test a question'''
 
     def tearDown(self):
+        MY_DATABASE.drop_users_table()
         MY_DATABASE.drop_questions_table()
         MY_DATABASE.drop_answers_table()
         MY_DATABASE.create_users_table()

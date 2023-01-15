@@ -28,7 +28,7 @@ jobs:
     # Then run your tests!
     # CircleCI will report the results back to your VCS provider.
         environment:
-          TEST_DATABASE_URL: postgres://postgres:username@localhost/test
+          DATABASE_URL: postgres://postgres:username@localhost/test
         auth:
           username: mungaidaniel
           password: wanjiruAmungai32
