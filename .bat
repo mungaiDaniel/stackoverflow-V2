@@ -1,1 +1,0 @@
-set DATABASE_URL=postgresql://postgres:username@localhost/user
