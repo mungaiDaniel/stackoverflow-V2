@@ -4,3 +4,4 @@ __pycache__
 .coveragerc
 .coverage
 pytest.ini
+.bat
