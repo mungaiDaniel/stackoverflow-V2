@@ -30,6 +30,7 @@ def post():
     format_str = f"""
                  INSERT INTO public.users (username,email,password,date_created,date_modified)
                  VALUES ('{username}','{email}','{password}','{str(datetime.now())}','{str(datetime.now())}');
+                 
                  """
     
     new_user.save(format_str)

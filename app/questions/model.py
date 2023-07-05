@@ -23,6 +23,21 @@ class Question(MY_DATABASE):
         self.date_created = date_created
         self.date_modified = date_modified
 
+    def save(self, title, body, user_id, date_created, date_modified):
+        '''method to save a question'''
+        format_str = f"""
+         INSERT INTO public.questions (title,body,user_id,date_created,date_modified)
+         VALUES ('{title}','{body}',{user_id},'{str(datetime.datetime.now().date())}','{str(datetime.datetime.now().date())}') ;
+         """
+        cursor.execute(format_str)
+        return {
+            "title": title,
+            "body": body,
+            "user_id": user_id,
+            "date_created": str(date_created),
+            "date_modified": str(date_modified),
+        }
+
     def json_dumps(self):
         '''method to return a json object from the question details'''
         obj = {
