@@ -15,7 +15,7 @@ class Question(MY_DATABASE):
     '''Class to model a question'''
 
     def __init__(self,id, title, body, user_id, date_created, date_modified):
-        '''method to initialize Question class'''
+        '''method to initialize post class'''
         self.id = id
         self.title = title
         self.body = body
@@ -24,7 +24,7 @@ class Question(MY_DATABASE):
         self.date_modified = date_modified
 
     def save(self, title, body, user_id, date_created, date_modified):
-        '''method to save a question'''
+        '''method to save a post'''
         format_str = f"""
          INSERT INTO public.questions (title,body,user_id,date_created,date_modified)
          VALUES ('{title}','{body}',{user_id},'{str(datetime.datetime.now().date())}','{str(datetime.datetime.now().date())}') ;

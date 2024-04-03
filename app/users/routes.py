@@ -78,3 +78,12 @@ def get_all():
         "status": 200,
         "data": users
     }), 200)
+
+@user_v2.route('/user/<int:id>', methods=['GET'])
+def get_one_user(id):
+      user = User.find_by_id(id)
+
+      return make_response(jsonify({
+        "status": 200,
+        "data": user
+    }), 200)
