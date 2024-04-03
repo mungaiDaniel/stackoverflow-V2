@@ -38,3 +38,5 @@ app_config = {
     'testing': TestingConfig,
     'default': DevelopmentConfig
 }
+
+# postgres://stackoverflow_ak7y_user:VFFBWeKiQNpQ5rB0a9yTMjNiMg9Lj72Z@dpg-co6n14i0si5c73cj2e20-a.oregon-postgres.render.com/stackoverflow_ak7y
