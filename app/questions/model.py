@@ -15,13 +15,28 @@ class Question(MY_DATABASE):
     '''Class to model a question'''
 
     def __init__(self,id, title, body, user_id, date_created, date_modified):
-        '''method to initialize Question class'''
+        '''method to initialize post class'''
         self.id = id
         self.title = title
         self.body = body
         self.user_id = user_id
         self.date_created = date_created
         self.date_modified = date_modified
+
+    def save(self, title, body, user_id, date_created, date_modified):
+        '''method to save a post'''
+        format_str = f"""
+         INSERT INTO public.questions (title,body,user_id,date_created,date_modified)
+         VALUES ('{title}','{body}',{user_id},'{str(datetime.datetime.now().date())}','{str(datetime.datetime.now().date())}') ;
+         """
+        cursor.execute(format_str)
+        return {
+            "title": title,
+            "body": body,
+            "user_id": user_id,
+            "date_created": str(date_created),
+            "date_modified": str(date_modified),
+        }
 
     def json_dumps(self):
         '''method to return a json object from the question details'''

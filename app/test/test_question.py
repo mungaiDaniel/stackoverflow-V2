@@ -2,7 +2,7 @@ import json
 import unittest
 import datetime
 
-from app import app
+from app.app import app
 
 from app.database import MY_DATABASE
 from config import TestingConfig
@@ -13,6 +13,7 @@ class TestQuestion(unittest.TestCase):
     '''class to test a question'''
 
     def tearDown(self):
+        MY_DATABASE.drop_users_table()
         MY_DATABASE.drop_questions_table()
         MY_DATABASE.drop_answers_table()
         MY_DATABASE.create_users_table()

@@ -30,7 +30,7 @@ def login_user(self):
         'api/v2/login',
         data=json.dumps(dict(
             username='username254',
-            email='username254@gmail.com'
+            password='password'
         )),
         content_type='application/json'
     )

@@ -1,2 +1,1 @@
-web: gunicorn app:app
-heroku ps:scale web=1
+web: gunicorn app.app:app --host=0.0.0.0 --port=${PORT:-5000}

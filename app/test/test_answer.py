@@ -4,7 +4,7 @@ import unittest
 
 import datetime
 
-from app import app
+from app.app import app
 
 from app.database import MY_DATABASE
 
@@ -17,6 +17,7 @@ from app.helper_function import post_quiz, register_user, login_user, post_answe
 class TestAnswer(unittest.TestCase):
     
     def tearDown(self):
+        MY_DATABASE.drop_users_table()
         MY_DATABASE.drop_questions_table()
         MY_DATABASE.drop_answers_table()
         MY_DATABASE.create_users_table()
