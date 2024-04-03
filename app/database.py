@@ -20,7 +20,7 @@ class MY_DATABASE:
         sql_command = """CREATE TABLE IF NOT EXISTS "public"."questions"  (
         id SERIAL ,
         title VARCHAR(255) NOT NULL,
-        body TEXT NOT NULL,
+        body VARCHAR(1000) NOT NULL,
         user_id INTEGER NOT NULL,
         date_created VARCHAR(80),
         date_modified VARCHAR(80),
